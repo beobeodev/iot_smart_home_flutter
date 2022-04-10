@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_smart_home/core/constants/asset_path.dart';
+import 'package:iot_smart_home/core/constants/palette.dart';
+import 'package:iot_smart_home/core/router/route_manager.dart';
 import 'package:iot_smart_home/modules/home/widgets/control_container.dart';
 import 'package:iot_smart_home/modules/home/widgets/weather_container.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool turnOn = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFE5E5E5),
+          backgroundColor: Palette.gray100,
           automaticallyImplyLeading: false,
           toolbarHeight: 70.h,
           //centerTitle: true,
@@ -26,8 +37,8 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Hi, Lex',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  'Hi, PBL5',
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 Container(
                   width: 50,
@@ -54,10 +65,10 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
+                const Icon(
                   Icons.keyboard_voice
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TabBar(
@@ -109,16 +120,29 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      ControlContainer(
-                        // turnOn: true,
-                        iconDevicePath: AssetPath.iconLight,
-                        deviceName: "Light",
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(RouteManager.controlLightScreen);
+                        },
+                        child:  ControlContainer(
+                          turnOn: turnOn,
+                          iconDevicePath: AssetPath.iconLight,
+                          deviceName: "Light",
+                          onTapTurnOn: () {
+                            setState(() {
+                              turnOn = !turnOn;
+                            });
+                          },
+                        ),
                       ),
                       ControlContainer(
                         // turnOn: true,
                         iconDevicePath: AssetPath.iconLight,
                         deviceName: "Light",
+                        onTapTurnOn: () {
+
+                        },
                       ),
                     ],
                   )
@@ -135,7 +159,8 @@ class HomeScreen extends StatelessWidget {
               child: Text('under construction'),
             ),
           ],
-        )
+        ),
+        backgroundColor: Colors.white,
       ),
     );
   }

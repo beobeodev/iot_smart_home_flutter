@@ -25,32 +25,34 @@ class WeatherContainer extends StatelessWidget {
           ),
           padding: const EdgeInsets.only(
             top: 10,
-            right: 10
+            right: 10,
+            bottom: 10
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '28°C',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Text(
-                    'Cloudy',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Rainy',
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   // SizedBox(
                   //   height: getProportionateScreenHeight(5),
                   // ),
                   Text(
-                    '27 Mar 2022',
-                    style: Theme.of(context).textTheme.headline6,
+                    '02/04/2022',
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Text(
-                    'Jagakarsa,Jakarta',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Da Nang',
+                    style: Theme.of(context).textTheme.subtitle1,
                   )
                 ],
               ),

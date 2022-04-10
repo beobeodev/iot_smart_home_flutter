@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iot_smart_home/core/constants/palette.dart';
 
 class ControlContainer extends StatelessWidget {
   final bool turnOn;
   final String iconDevicePath;
   final String deviceName;
+  final void Function() onTapTurnOn;
 
-  const ControlContainer({Key? key, this.turnOn = false, required this.iconDevicePath, required this.deviceName}) : super(key: key);
+  const ControlContainer({Key? key, this.turnOn = false, required this.iconDevicePath, required this.deviceName, required this.onTapTurnOn}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,16 @@ class ControlContainer extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: turnOn
-            ? Colors.red
-            : const Color(0xffededed),
-        borderRadius: BorderRadius.circular(15)
+            ? Palette.orange500
+            : Palette.gray100,
+        borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              offset:  const Offset(0, 1),
+              blurRadius: 4,
+              color: Palette.gray500.withOpacity(0.3)
+            )
+          ]
       ),
       child: Column(
         children: [
@@ -34,18 +43,18 @@ class ControlContainer extends StatelessWidget {
                 height: 40.w,
                 decoration: BoxDecoration(
                   color: turnOn
-                      ? const Color.fromRGBO(45, 45, 45, 1)
-                      : const Color(0xffdadada),
+                      ? Colors.white
+                      : Palette.gray300,
                   borderRadius: BorderRadius.circular(50)
                 ),
                 child: SvgPicture.asset(
                   iconDevicePath,
-                  color: turnOn ? Colors.amber : const Color(0xFF808080),
+                  color: turnOn ? Colors.amber : Palette.gray100,
                 ),
               ),
               const Icon(
                 Icons.star_rounded,
-                color: Color(0xFF808080),
+                color: Colors.white,
               ),
             ],
           ),
@@ -74,18 +83,16 @@ class ControlContainer extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-
-                },
+                onTap: onTapTurnOn,
                 child: Container(
                   width: 48.w,
-                  height: 25.6.h,
+                  height: 26.h,
                   padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: turnOn ? Colors.black : const Color(0xffd6d6d6),
+                    color: turnOn ? Palette.blue200 : Palette.gray300,
                     border: Border.all(
-                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      color: Colors.white,
                       width: turnOn ? 2 : 0,
                     ),
                   ),
@@ -93,8 +100,8 @@ class ControlContainer extends StatelessWidget {
                     children: [
                       turnOn ? const Spacer() : const SizedBox(),
                       Container(
-                        width: 20.w,
-                        height: 20.w,
+                        width: 18.w,
+                        height: 18.w,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(100),
