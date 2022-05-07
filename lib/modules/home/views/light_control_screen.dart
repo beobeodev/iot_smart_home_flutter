@@ -3,7 +3,8 @@ import 'package:iot_smart_home/core/constants/asset_path.dart';
 
 class LightControlScreen extends StatelessWidget {
   final bool isLightTurnOn;
-  const LightControlScreen({Key? key, this.isLightTurnOn = true}) : super(key: key);
+  const LightControlScreen({Key? key, this.isLightTurnOn = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class LightControlScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 19,
                   top: 7,
                 ),
@@ -23,22 +24,21 @@ class LightControlScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         left: 19,
                         top: 7,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 40,
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Icon(Icons.arrow_back_outlined)
-                          ),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Icon(Icons.arrow_back_outlined)),
                           Stack(
                             children: [
                               Text(
@@ -47,10 +47,10 @@ class LightControlScreen extends StatelessWidget {
                                     .textTheme
                                     .subtitle1!
                                     .copyWith(
-                                  fontSize: 45,
-                                  color: const Color(0xFFBDBDBD)
-                                      .withOpacity(0.5),
-                                ),
+                                      fontSize: 45,
+                                      color: const Color(0xFFBDBDBD)
+                                          .withOpacity(0.5),
+                                    ),
                               ),
                               Text(
                                 'Living\nRoom',
@@ -58,14 +58,14 @@ class LightControlScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 26,
                           ),
                           Text(
                             'Power',
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Switch.adaptive(
@@ -74,17 +74,15 @@ class LightControlScreen extends StatelessWidget {
                             activeColor: Colors.white,
                             activeTrackColor: const Color(0xFF464646),
                             value: true,
-                            onChanged: (value) {
-
-                            },
+                            onChanged: (value) {},
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                   ],
