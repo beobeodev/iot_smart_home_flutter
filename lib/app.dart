@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               );
             },
             routes: RouteManager.listRoute,
-            initialRoute: RouteManager.root);
+            initialRoute: RouteManager.login);
       },
     );
   }
