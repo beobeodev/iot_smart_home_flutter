@@ -1,0 +1,12 @@
+{
+  "text": {
+    "username": "Tài khoản",
+    "password": "Mật khẩu"
+  },
+  "error": {
+    "incorrect_ip_password": "Sai địa chỉ ip hoặc mật khẩu"
+  },
+  "button": {
+    "login": "Đăng nhập"
+  }
+}

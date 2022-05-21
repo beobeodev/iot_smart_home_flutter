@@ -1,0 +1,12 @@
+{
+  "text": {
+    "username": "Username",
+    "password": "Password"
+  },
+  "error": {
+    "incorrect_ip_password": "Incorrect ip mac or password"
+  },
+  "button": {
+    "login": "Login"
+  }
+}

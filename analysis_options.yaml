@@ -9,6 +9,8 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
@@ -24,6 +26,24 @@ linter:
   rules:
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
-
+    constant_identifier_names: false
+    prefer_single_quotes: true
+    always_use_package_imports: true
+    prefer_final_in_for_each: true
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+# include: package:flutter_lints/flutter.yaml
+
+# analyzer:
+
+# linter:
+#   rules:
+#     - avoid_print
+#     - require_trailing_commas
+#     - prefer_single_quotes
+#     - cascade_invocations
+#     - always_use_package_imports
+#     - sort_child_properties_last
+#     - sort_constructors_first
+#     - sort_unnamed_constructors_first
+#     - unnecessary_string_interpolations

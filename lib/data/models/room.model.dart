@@ -13,5 +13,4 @@ class RoomModel extends RoomEntity {
   factory RoomModel.fromJson(Map<String, dynamic> json) =>
       _$RoomModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RoomModelToJson(this);
 }

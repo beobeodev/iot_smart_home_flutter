@@ -6,7 +6,7 @@ class RoomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text("Room screen")),
+      body: Center(child: Text('Room screen')),
     );
   }
 }

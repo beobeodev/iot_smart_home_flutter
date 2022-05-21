@@ -29,13 +29,13 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Chào buổi sáng, Quốc Đạt",
+                  Text('Chào buổi sáng, Quốc Đạt',
                       style: TextStyle(
                           fontFamily: FontFamily.fontMulish,
                           fontWeight: FontWeight.w800,
                           color: Palette.outerSpace500,
                           fontSize: 20.sp)),
-                  Text("Hãy luôn tiết kiệm điện!",
+                  Text('Hãy luôn tiết kiệm điện!',
                       style: TextStyle(
                           fontFamily: FontFamily.fontMulish,
                           fontWeight: FontWeight.w400,
@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Lượng điện sử dụng",
+                    'Lượng điện sử dụng',
                     style: TextStyle(
                         fontFamily: FontFamily.fontMulish,
                         fontWeight: FontWeight.w800,
@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const Icon(UniconsLine.stopwatch),
                       Text(
-                        "06/05/2022",
+                        '06/05/2022',
                         style: TextStyle(
                             fontFamily: FontFamily.fontMulish,
                             fontSize: 14.sp,
@@ -109,14 +109,14 @@ class HomeScreen extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "Hôm nay",
+                            'Hôm nay',
                             style: TextStyle(
                                 fontFamily: FontFamily.fontMulish,
                                 fontSize: 14.sp,
                                 color: Palette.outerSpace300),
                           ),
                           Text(
-                            "30 kWh",
+                            '30 kWh',
                             style: TextStyle(
                                 fontFamily: FontFamily.fontMulish,
                                 fontSize: 16.sp,
@@ -136,14 +136,14 @@ class HomeScreen extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "Tháng này",
+                            'Tháng này',
                             style: TextStyle(
                                 fontFamily: FontFamily.fontMulish,
                                 fontSize: 14.sp,
                                 color: Palette.outerSpace300),
                           ),
                           Text(
-                            "323 kWh",
+                            '323 kWh',
                             style: TextStyle(
                                 fontFamily: FontFamily.fontMulish,
                                 fontSize: 16.sp,
@@ -167,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Thiết bị",
+                      'Thiết bị',
                       style: TextStyle(
                           fontFamily: FontFamily.fontMulish,
                           fontWeight: FontWeight.w800,
@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                                     height: 5.h,
                                   ),
                                   Text(
-                                    "Đèn",
+                                    'Đèn',
                                     style: TextStyle(
                                         color: Palette.outerSpace400,
                                         fontFamily: FontFamily.fontMulish,
@@ -208,7 +208,7 @@ class HomeScreen extends StatelessWidget {
                           }),
                     ),
                     Text(
-                      "Phòng khách",
+                      'Phòng khách',
                       style: TextStyle(
                           fontFamily: FontFamily.fontMulish,
                           fontWeight: FontWeight.w800,
@@ -270,7 +270,7 @@ class HomeScreen extends StatelessWidget {
                                     height: 20.h,
                                   ),
                                   Text(
-                                    "Đèn",
+                                    'Đèn',
                                     style: TextStyle(
                                         color: Palette.blue500,
                                         fontFamily: FontFamily.fontMulish,
