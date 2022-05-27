@@ -1,10 +1,10 @@
-class AssetPath {
+abstract class AssetPath {
   // ICONS
   static const String iconLight = 'assets/icons/light.svg';
 
   // IMAGE WEATHER
-  static const String imageWeather = 'assets/images/weather';
-  static const String imageWeatherRain = 'assets/images/weather/0.png';
+  static const String imageRainy = 'assets/images/weather/rainy.png';
+  static const String imageSunny = 'assets/images/weather/sunny.png';
 
   // IMAGE DEVICES
   static const String imageLamp = 'assets/images/devices/lamp.png';

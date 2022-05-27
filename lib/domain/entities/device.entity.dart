@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'device.entity.g.dart';
-
-@JsonSerializable()
 class DeviceEntity extends Equatable {
   final String name;
   final int gate;
@@ -12,14 +8,23 @@ class DeviceEntity extends Equatable {
   const DeviceEntity(
       {required this.name, required this.gate, this.status = false});
 
+  factory DeviceEntity.fromJson(Map<String, dynamic> json) {
+    return DeviceEntity(
+      name: json['name'] as String,
+      gate: json['gate'] as int,
+      status: json['status'] as bool,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'gate': gate,
+        'status': status,
+      };
+
   @override
   List<Object?> get props => [name, gate, status];
 
   @override
   bool? get stringify => true;
-
-  factory DeviceEntity.fromJson(Map<String, dynamic> json) =>
-      _$DeviceEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DeviceEntityToJson(this);
 }

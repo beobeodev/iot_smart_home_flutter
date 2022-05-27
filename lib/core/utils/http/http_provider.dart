@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:iot_smart_home/core/constants/key_env.dart';
 import 'package:iot_smart_home/core/utils/http/exceptions.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class HttpProvider {
   static Future<T> get<T>(String url) async {
     try {
-      final String endpoint = '${dotenv.env['API_URL']}$url';
+      final String endpoint = '${dotenv.env[KeyEnv.apiUrl]}$url';
       final http.Response response = await http.get(Uri.parse(endpoint));
       return _returnResponse(response);
     } on SocketException {
@@ -19,7 +20,8 @@ abstract class HttpProvider {
   static Future<T> post<T>(String url, Map<String, dynamic> formBody) async {
     try {
       final String endpoint = '${dotenv.env['API_URL']}$url';
-      final http.Response response = await http.post(Uri.parse(endpoint));
+      final http.Response response =
+          await http.post(Uri.parse(endpoint), body: formBody);
       return _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No internet connection');

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,9 +29,6 @@ class FormInput extends StatelessWidget {
             textController: ipController,
             icon: UniconsLine.user,
             hintText: LocaleKeys.text_username.tr,
-            onChanged: (value) {
-              log(value);
-            },
           ),
           const Divider(
             color: Palette.lightGray,
@@ -43,9 +38,6 @@ class FormInput extends StatelessWidget {
             textController: passController,
             icon: UniconsLine.lock,
             hintText: LocaleKeys.text_password.tr,
-            onChanged: (value) {
-              log(value);
-            },
             isObsecure: true,
           ),
         ],

@@ -12,17 +12,18 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       minTextAdapt: true,
-      builder: () {
+      splitScreenMode: true,
+      builder: (context, child) {
         return GetMaterialApp(
           title: 'Smart Home',
           debugShowCheckedModeBanner: false,
-          builder: (context, widget) {
-            ScreenUtil.setContext(context);
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: widget!,
-            );
-          },
+          // builder: (context, widget) {
+          //   ScreenUtil.setContext(context);
+          //   return MediaQuery(
+          //     data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          //     child: widget!,
+          //   );
+          // },
           getPages: RouteManager.pages,
           initialRoute: RouteManager.login,
           translationsKeys: AppTranslation.translations,

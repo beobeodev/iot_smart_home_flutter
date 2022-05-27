@@ -1,3 +1,3 @@
-class FontFamily {
+abstract class FontFamily {
   static const String fontMulish = 'Mulish';
 }

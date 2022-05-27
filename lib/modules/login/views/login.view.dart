@@ -67,7 +67,7 @@ class LoginScreen extends GetView<LoginController> {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 20.sp),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

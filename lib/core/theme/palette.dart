@@ -30,4 +30,5 @@ class Palette {
   static const Color cultured = Color(0xFFF7F7F9);
   static const Color aliceBlue = Color(0xFFF0F9FF);
   static const Color ghostWhite = Color(0xFFF9F9FA);
+  static const Color purple = Color(0xFF4F32FF);
 }

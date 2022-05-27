@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iot_smart_home/core/constants/asset_path.dart';
 
-class LightControlScreen extends StatelessWidget {
+class ControlLighScreen extends StatelessWidget {
   final bool isLightTurnOn;
-  const LightControlScreen({Key? key, this.isLightTurnOn = true})
+  const ControlLighScreen({Key? key, this.isLightTurnOn = true})
       : super(key: key);
 
   @override

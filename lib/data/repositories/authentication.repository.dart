@@ -2,12 +2,12 @@ import 'package:iot_smart_home/core/resouces/request_state.dart';
 import 'package:iot_smart_home/core/utils/http/exceptions.dart';
 import 'package:iot_smart_home/data/datasources/remote/authentication.datasouce.dart';
 import 'package:iot_smart_home/data/models/raspberry.model.dart';
-import 'package:iot_smart_home/domain/repositories/authentication.repository.dart';
+import 'package:iot_smart_home/domain/repositories/iauthentication.repository.dart';
 
-class AuthenticationImlRepository implements AuthenticationRepository {
+class AuthenticationRepository implements IAuthenticationRepository {
   final AuthenticationDatasouce authenticationDatasouce;
 
-  AuthenticationImlRepository({required this.authenticationDatasouce});
+  AuthenticationRepository({required this.authenticationDatasouce});
 
   @override
   Future<RequestState<RaspberryModel>> login(

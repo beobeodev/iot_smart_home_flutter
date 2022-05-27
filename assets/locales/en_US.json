@@ -1,7 +1,8 @@
 {
   "text": {
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "warning": "Warning"
   },
   "error": {
     "incorrect_ip_password": "Incorrect ip mac or password"

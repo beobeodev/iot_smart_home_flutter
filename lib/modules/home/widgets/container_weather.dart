@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_smart_home/core/constants/asset_path.dart';
+import 'package:iot_smart_home/core/theme/palette.dart';
 
-class WeatherContainer extends StatelessWidget {
-  const WeatherContainer({Key? key}) : super(key: key);
+class ContainerWeather extends StatelessWidget {
+  const ContainerWeather({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         Container(
-          height: 140.h,
+          height: 145.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                offset:  const Offset(0, 1),
-                blurRadius: 4,
-                color: const Color(0xFF333333).withOpacity(0.4)
-              )
-            ]
-          ),
-          padding: const EdgeInsets.only(
-            top: 10,
-            right: 10,
-            bottom: 10
-          ),
+              color: Palette.aliceBlue,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 6),
+                    blurRadius: 12)
+              ]),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -59,10 +55,14 @@ class WeatherContainer extends StatelessWidget {
             ],
           ),
         ),
-        Image.asset(
-          AssetPath.imageWeatherRain,
-          height: 160.h,
-          fit: BoxFit.cover,
+        Positioned(
+          top: 12,
+          left: 20,
+          child: Image.asset(
+            AssetPath.imageSunny,
+            height: 160.h,
+            fit: BoxFit.fill,
+          ),
         )
       ],
     );
