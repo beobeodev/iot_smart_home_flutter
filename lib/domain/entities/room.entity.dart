@@ -7,18 +7,18 @@ class RoomEntity extends Equatable {
 
   const RoomEntity({required this.name, required this.devices});
 
-  factory RoomEntity.fromJson(Map<String, dynamic> json) {
-    return RoomEntity(
-        name: json['name'] as String,
-        devices: (json['devices'] as List<dynamic>)
-            .map((e) => DeviceEntity.fromJson(e))
-            .toList());
-  }
+  // factory RoomEntity.fromJson(Map<String, dynamic> json) {
+  //   return RoomEntity(
+  //       name: json['name'] as String,
+  //       devices: (json['devices'] as List<dynamic>)
+  //           .map((e) => DeviceEntity.fromJson(e))
+  //           .toList());
+  // }
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'devices': devices,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       'name': name,
+  //       'devices': devices,
+  //     };
 
   @override
   bool? get stringify => true;

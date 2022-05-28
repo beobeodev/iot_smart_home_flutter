@@ -8,19 +8,19 @@ class DeviceEntity extends Equatable {
   const DeviceEntity(
       {required this.name, required this.gate, this.status = false});
 
-  factory DeviceEntity.fromJson(Map<String, dynamic> json) {
-    return DeviceEntity(
-      name: json['name'] as String,
-      gate: json['gate'] as int,
-      status: json['status'] as bool,
-    );
-  }
+  // factory DeviceEntity.fromJson(Map<String, dynamic> json) {
+  //   return DeviceEntity(
+  //     name: json['name'] as String,
+  //     gate: json['gate'] as int,
+  //     status: json['status'] as bool,
+  //   );
+  // }
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'gate': gate,
-        'status': status,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       'name': name,
+  //       'gate': gate,
+  //       'status': status,
+  //     };
 
   @override
   List<Object?> get props => [name, gate, status];

@@ -9,14 +9,18 @@ import 'package:iot_smart_home/core/router/route_manager.dart';
 import 'package:iot_smart_home/core/utils/http/exceptions.dart';
 import 'package:iot_smart_home/domain/entities/raspberry.entity.dart';
 import 'package:iot_smart_home/domain/usecases/authentication/authentication.usecase.dart';
+import 'package:iot_smart_home/domain/usecases/raspberry/save_ip_mac.usecase.dart';
 import 'package:iot_smart_home/generated/locales.g.dart';
 
 class LoginController extends GetxController {
   final LoginUseCase loginUseCase;
   final SetLoggedInUseCase setLoggedInUseCase;
+  final SaveIpMacUseCase saveIpMacUseCase;
 
   LoginController(
-      {required this.loginUseCase, required this.setLoggedInUseCase});
+      {required this.loginUseCase,
+      required this.setLoggedInUseCase,
+      required this.saveIpMacUseCase});
 
   final TextEditingController ipController = TextEditingController();
   final TextEditingController passController = TextEditingController();
@@ -39,9 +43,10 @@ class LoginController extends GetxController {
 
     if (state is RequestFailed<RaspberryEntity>) {
       handleError(state);
-    } else {
+    } else if (state is RequestSuccess<RaspberryEntity>) {
       setLoggedInUseCase.execute();
-      Get.offAllNamed(RouteManager.root);
+      saveIpMacUseCase.execute(params: state.data!.ipMac);
+      Get.offAllNamed(RouteManager.root, arguments: state.data);
     }
 
     isProcessing.value = false;

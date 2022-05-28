@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           //   );
           // },
           getPages: RouteManager.pages,
-          initialRoute: RouteManager.login,
+          initialRoute: RouteManager.splash,
           translationsKeys: AppTranslation.translations,
           fallbackLocale: const Locale('vi', 'VN'),
           locale: Get.deviceLocale,

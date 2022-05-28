@@ -16,25 +16,25 @@ class RaspberryEntity extends Equatable {
     required this.rooms,
   });
 
-  factory RaspberryEntity.fromJson(Map<String, dynamic> json) {
-    return RaspberryEntity(
-      id: json['_id'] as String,
-      ipMac: json['ip_mac'] as String,
-      customerName: json['customer_name'] as String?,
-      customerPhone: json['customer_phone'] as String?,
-      rooms: (json['rooms'] as List<dynamic>)
-          .map((e) => RoomEntity.fromJson(e))
-          .toList(),
-    );
-  }
+  // factory RaspberryEntity.fromJson(Map<String, dynamic> json) {
+  //   return RaspberryEntity(
+  //     id: json['_id'] as String,
+  //     ipMac: json['ip_mac'] as String,
+  //     customerName: json['customer_name'] as String?,
+  //     customerPhone: json['customer_phone'] as String?,
+  //     rooms: (json['rooms'] as List<dynamic>)
+  //         .map((e) => RoomEntity.fromJson(e))
+  //         .toList(),
+  //   );
+  // }
 
-  Map<String, dynamic> toJson() => {
-        '_id': id,
-        'ip_mac': ipMac,
-        'customer_name': customerName,
-        'customer_phone': customerPhone,
-        'rooms': rooms,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       '_id': id,
+  //       'ip_mac': ipMac,
+  //       'customer_name': customerName,
+  //       'customer_phone': customerPhone,
+  //       'rooms': rooms,
+  //     };
 
   @override
   bool get stringify => true;
