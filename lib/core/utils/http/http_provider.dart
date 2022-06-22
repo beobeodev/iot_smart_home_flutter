@@ -20,8 +20,22 @@ abstract class HttpProvider {
   static Future<T> post<T>(String url, Map<String, dynamic> formBody) async {
     try {
       final String endpoint = '${dotenv.env['API_URL']}$url';
+      final Map<String, String> header = {
+        'Content-Type': 'application/json',
+      };
+      final http.Response response = await http.post(Uri.parse(endpoint),
+          body: jsonEncode(formBody), headers: header);
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No internet connection');
+    }
+  }
+
+  static Future<T> patch<T>(String url, Map<String, dynamic> formBody) async {
+    try {
+      final String endpoint = '${dotenv.env['API_URL']}$url}';
       final http.Response response =
-          await http.post(Uri.parse(endpoint), body: formBody);
+          await http.patch(Uri.parse(endpoint), body: formBody);
       return _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No internet connection');
@@ -31,9 +45,10 @@ abstract class HttpProvider {
   static T _returnResponse<T>(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        return jsonDecode(response.body.toString());
+      case 201:
+        return jsonDecode(response.body);
       case 400:
-        throw BadRequestException(response.body.toString());
+        throw BadRequestException(response.body);
       case 401:
       case 403:
         throw UnauthorisedException(response.body.toString());

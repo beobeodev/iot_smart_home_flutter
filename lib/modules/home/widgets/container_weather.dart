@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iot_smart_home/core/constants/asset_path.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
+import 'package:iot_smart_home/core/utils/extensions/date_time.extension.dart';
+import 'package:iot_smart_home/modules/home/controllers/home.controller.dart';
 
-class ContainerWeather extends StatelessWidget {
+class ContainerWeather extends GetView<HomeController> {
   const ContainerWeather({Key? key}) : super(key: key);
 
   @override
@@ -27,31 +30,40 @@ class ContainerWeather extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '28°C',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  Text(
-                    'Rainy',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  // SizedBox(
-                  //   height: getProportionateScreenHeight(5),
-                  // ),
-                  Text(
-                    '02/04/2022',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  Text(
-                    'Da Nang',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  )
-                ],
-              ),
+              FutureBuilder(
+                future: controller.getTempAndHuman(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text(
+                      'Đang cập nhật...',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    );
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${controller.currentDHT11.temperature} \u2103',
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          '${controller.currentDHT11.humandity} %',
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          DateTime.now().toFullDate,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          'Da Nang',
+                          style: Theme.of(context).textTheme.subtitle1,
+                        )
+                      ],
+                    );
+                  }
+                  return const SizedBox();
+                },
+              )
             ],
           ),
         ),

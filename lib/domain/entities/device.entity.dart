@@ -1,12 +1,9 @@
-import 'package:equatable/equatable.dart';
+class DeviceEntity {
+  String name;
+  int? gate;
+  bool status;
 
-class DeviceEntity extends Equatable {
-  final String name;
-  final int gate;
-  final bool? status;
-
-  const DeviceEntity(
-      {required this.name, required this.gate, this.status = false});
+  DeviceEntity({required this.name, this.gate, this.status = false});
 
   // factory DeviceEntity.fromJson(Map<String, dynamic> json) {
   //   return DeviceEntity(
@@ -16,15 +13,16 @@ class DeviceEntity extends Equatable {
   //   );
   // }
 
-  // Map<String, dynamic> toJson() => {
-  //       'name': name,
-  //       'gate': gate,
-  //       'status': status,
-  //     };
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'gate': gate,
+        'status': status,
+      };
 
-  @override
-  List<Object?> get props => [name, gate, status];
-
-  @override
-  bool? get stringify => true;
+  DeviceEntity copyWith({String? name, int? gate, bool? status}) {
+    return DeviceEntity(
+        name: name ?? this.name,
+        gate: gate ?? this.gate,
+        status: status ?? this.status);
+  }
 }

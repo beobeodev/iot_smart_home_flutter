@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iot_smart_home/core/constants/font_family.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
+import 'package:iot_smart_home/modules/home/controllers/home.controller.dart';
 import 'package:iot_smart_home/modules/home/widgets/gridview_devices_in_room.widget.dart';
 import 'package:iot_smart_home/modules/home/widgets/listview_device.widget.dart';
 import 'package:iot_smart_home/modules/home/widgets/container_weather.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -55,9 +57,28 @@ class HomeScreen extends StatelessWidget {
             height: 24.h,
           ),
           const ContainerWeather(),
-          SizedBox(
-            height: 36.h,
+          const SizedBox(
+            height: 30,
           ),
+          Align(
+            child: TextButton(
+              onPressed: controller.onTapButtonRecord,
+              child: Obx(() => Icon(
+                    controller.isRecording ? Icons.pause : Icons.mic,
+                    color: Colors.white,
+                  )),
+              style: TextButton.styleFrom(
+                  backgroundColor: Palette.blue500,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                  minimumSize: const Size(60, 60)),
+            ),
+          ),
+          // IconButton(
+          //     onPressed: () {},
+
+          //     icon: Icon(controller.isRecording ? Icons.pause : Icons.mic)),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

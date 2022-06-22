@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
 import 'package:iot_smart_home/modules/favorite/views/favorite_screen.dart';
-import 'package:iot_smart_home/modules/home/home_screen.dart';
+import 'package:iot_smart_home/modules/home/views/home.view.dart';
 import 'package:iot_smart_home/modules/profile/views/profile_screen.dart';
 import 'package:iot_smart_home/modules/room/views/room.view.dart';
 import 'package:iot_smart_home/modules/root/controllers/root.controller.dart';

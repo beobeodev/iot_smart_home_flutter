@@ -14,4 +14,6 @@ abstract class AssetPath {
   static const String imageSmartHome =
       'assets/images/decoration/text_smart_home.png';
   static const String imageRoom = 'assets/images/decoration/room.png';
+  static const String imageRealityRoom =
+      'assets/images/decoration/reality_room.png';
 }
