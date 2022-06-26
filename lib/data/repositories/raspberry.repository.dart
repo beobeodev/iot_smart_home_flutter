@@ -65,7 +65,6 @@ class RaspberryRepository extends IRaspberryRepository {
     try {
       final Map<String, dynamic> controlStatus =
           await datasource.predictBySpeech(formBody);
-      log(controlStatus.toString());
       return RequestSuccess(controlStatus);
     } on AppException catch (e) {
       return RequestFailed(e);

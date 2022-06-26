@@ -29,7 +29,7 @@ class HomeController extends GetxController {
   bool get isRecording => _isRecording.value;
 
   final Rx<DHT11Entity> _currentDTH11 =
-      DHT11Entity(humandity: 0, temperature: 0).obs;
+      DHT11Entity(humidity: 0, temperature: 0).obs;
   DHT11Entity get currentDHT11 => _currentDTH11.value;
 
   @override
@@ -62,13 +62,22 @@ class HomeController extends GetxController {
   }
 
   Future<void> onTapButtonRecord() async {
+    log(isRecording.toString());
+
     if (isRecording) {
       final String audioPath = await RecordAudio.stopRecord();
       final String base64Audio = await RecordAudio.getBase64Audio(audioPath);
       final RequestState<Map<String, dynamic>> predictState =
           await predictBySpeechUseCase.execute(params: {
+        'ipMac': rootController.currentRaspberry.ipMac,
         'fileCode': base64Audio,
       });
+
+      if (predictState is RequestFailed) {
+        log(predictState.error.toString());
+      } else {
+        log('onTapButtonRecord success');
+      }
     } else {
       await RecordAudio.startRecord();
     }
@@ -81,6 +90,8 @@ class HomeController extends GetxController {
     if (dht11State is RequestSuccess) {
       _currentDTH11.value = dht11State.data!;
       log(dht11State.data.toString());
+    } else {
+      log(dht11State.error.toString());
     }
   }
 }

@@ -47,7 +47,7 @@ class ContainerWeather extends GetView<HomeController> {
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
-                          '${controller.currentDHT11.humandity} %',
+                          '${controller.currentDHT11.humidity} %',
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(

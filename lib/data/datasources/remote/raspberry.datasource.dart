@@ -38,7 +38,7 @@ class RaspberryDatasource implements IRaspberryDatasource {
   Future<Map<String, dynamic>> predictBySpeech(
       Map<String, dynamic> formBody) async {
     final Map<String, dynamic> rawData =
-        await HttpProvider.post('/api/predict', formBody);
+        await HttpProvider.post('/api/ras_predict', formBody);
     return rawData;
   }
 
