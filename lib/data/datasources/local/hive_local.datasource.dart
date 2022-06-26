@@ -5,9 +5,7 @@ import 'package:iot_smart_home/core/constants/key_env.dart';
 
 abstract class IHiveLocalDatasource {
   Future<Box> openAuthBox();
-  Future<void> setLoggedIn(bool value);
-  Future<bool?> checkLoggedIn();
-  Future<void> saveIpMac(String ipMac);
+  Future<void> setIpMac(String ipMac);
   Future<String?> getIpMac();
 }
 
@@ -18,26 +16,14 @@ class HiveLocalDatatasource implements IHiveLocalDatasource {
   }
 
   @override
-  Future<void> setLoggedIn(bool value) async {
+  Future<void> setIpMac(String ipMac) async {
     final Box authBox = await openAuthBox();
-    await authBox.put(KeyBoxHive.isNewUser, value);
-  }
-
-  @override
-  Future<bool?> checkLoggedIn() async {
-    final Box authBox = await openAuthBox();
-    return authBox.get(KeyBoxHive.isNewUser);
+    await authBox.put(KeyBoxHive.ipMac, ipMac);
   }
 
   @override
   Future<String> getIpMac() async {
     final Box authBox = await openAuthBox();
     return authBox.get(KeyBoxHive.ipMac);
-  }
-
-  @override
-  Future<void> saveIpMac(String ipMac) async {
-    final Box authBox = await openAuthBox();
-    await authBox.put(KeyBoxHive.ipMac, ipMac);
   }
 }

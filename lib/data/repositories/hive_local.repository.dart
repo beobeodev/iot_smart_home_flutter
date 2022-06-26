@@ -7,22 +7,12 @@ class HiveLocalRepository implements IHiveLocalRepository {
   HiveLocalRepository({required this.datatasource});
 
   @override
-  Future<void> setLoggedIn(bool value) async {
-    await datatasource.setLoggedIn(value);
-  }
-
-  @override
-  Future<bool?> checkNewUser() async {
-    return await datatasource.checkLoggedIn();
+  Future<void> setIpMac(String ipMac) async {
+    await datatasource.setIpMac(ipMac);
   }
 
   @override
   Future<String?> getIpMac() async {
     return await datatasource.getIpMac();
-  }
-
-  @override
-  Future<void> saveIpMac(String ipMac) async {
-    await datatasource.saveIpMac(ipMac);
   }
 }

@@ -14,7 +14,7 @@ import 'package:iot_smart_home/domain/usecases/raspberry/get_ip_mac.usecase.dart
 import 'package:iot_smart_home/domain/usecases/raspberry/get_raspberry_by_ipmac.usecase.dart';
 import 'package:iot_smart_home/domain/usecases/raspberry/get_temp_human.usecase.dart';
 import 'package:iot_smart_home/domain/usecases/raspberry/predict_by_speech.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/save_ip_mac.usecase.dart';
+import 'package:iot_smart_home/domain/usecases/raspberry/set_ip_mac.usecase.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -53,7 +53,7 @@ void initDependencies() {
   );
 
   getIt.registerLazySingleton(
-    () => SaveIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
+    () => SetIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
   );
   getIt.registerLazySingleton(
     () => GetIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
