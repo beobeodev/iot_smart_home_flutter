@@ -7,8 +7,11 @@ import 'package:iot_smart_home/modules/root/controllers/root.controller.dart';
 class CreateRoomBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => CreateRoomController(
+    Get.lazyPut(
+      () => CreateRoomController(
         addRoomToRaspUseCase: getIt.get<AddRoomToRaspUseCase>(),
-        rootController: Get.find<RootController>()));
+        rootController: Get.find<RootController>(),
+      ),
+    );
   }
 }

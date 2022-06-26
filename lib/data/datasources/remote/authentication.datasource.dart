@@ -1,9 +1,8 @@
-import 'package:iot_smart_home/core/utils/http/http_provider.dart';
-import 'package:iot_smart_home/data/models/raspberry.model.dart';
+import 'package:iot_smart_home/core/utils/dio/dio_provider.dart';
 
-class AuthenticationDatasource {
-  Future<RaspberryModel> login(Map<String, dynamic> formBody) async {
-    final dynamic rawData = await HttpProvider.post('/auth/login', formBody);
-    return RaspberryModel.fromJson(rawData);
+class AuthenticationRemoteDatasource {
+  Future<HttpRequestResponse> login(Map<String, dynamic> formBody) async {
+    return await DioProvider.post(url: '/auth/login', formBody: formBody);
+    // return RaspberryModel.fromJson(rawData);
   }
 }

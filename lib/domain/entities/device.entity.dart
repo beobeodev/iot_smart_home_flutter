@@ -21,8 +21,9 @@ class DeviceEntity {
 
   DeviceEntity copyWith({String? name, int? gate, bool? status}) {
     return DeviceEntity(
-        name: name ?? this.name,
-        gate: gate ?? this.gate,
-        status: status ?? this.status);
+      name: name ?? this.name,
+      gate: gate ?? this.gate,
+      status: status ?? this.status,
+    );
   }
 }

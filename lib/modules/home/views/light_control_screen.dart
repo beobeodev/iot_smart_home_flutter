@@ -35,10 +35,11 @@ class ControlLighScreen extends StatelessWidget {
                             height: 40,
                           ),
                           InkWell(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Icon(Icons.arrow_back_outlined)),
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Icon(Icons.arrow_back_outlined),
+                          ),
                           Stack(
                             children: [
                               Text(

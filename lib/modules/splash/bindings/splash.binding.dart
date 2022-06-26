@@ -8,9 +8,12 @@ import 'package:iot_smart_home/modules/splash/controllers/splash.controller.dart
 class SplashBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<SplashController>(SplashController(
+    Get.put<SplashController>(
+      SplashController(
         checkLoggedInUseCase: getIt.get<CheckLoggedInUseCase>(),
         getIpMacUseCase: getIt.get<GetIpMacUseCase>(),
-        getRaspberryByIpMacUseCase: getIt.get<GetRaspberryByIpMacUseCase>()));
+        getRaspberryByIpMacUseCase: getIt.get<GetRaspberryByIpMacUseCase>(),
+      ),
+    );
   }
 }

@@ -30,6 +30,7 @@ linter:
     prefer_single_quotes: true
     always_use_package_imports: true
     prefer_final_in_for_each: true
+    require_trailing_commas: true
     avoid_redundant_argument_values: true
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

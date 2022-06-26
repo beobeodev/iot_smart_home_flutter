@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:async/async.dart';
+import 'package:async/async.dart' as async;
 
 class LoadingDot extends StatefulWidget {
   final double size;
@@ -7,7 +7,7 @@ class LoadingDot extends StatefulWidget {
   const LoadingDot({Key? key, this.size = 30}) : super(key: key);
 
   @override
-  _LoadingDotState createState() => _LoadingDotState();
+  State<LoadingDot> createState() => _LoadingDotState();
 }
 
 class _LoadingDotState extends State<LoadingDot> with TickerProviderStateMixin {
@@ -37,7 +37,8 @@ class _LoadingDotState extends State<LoadingDot> with TickerProviderStateMixin {
           TweenSequenceItem(tween: Tween(begin: 0.1, end: 1.0), weight: 46),
           TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.0), weight: 8),
         ]).animate(
-            CurvedAnimation(parent: listAnimationController[i], curve: cubic)),
+          CurvedAnimation(parent: listAnimationController[i], curve: cubic),
+        ),
       );
 
       listOpacityAnimation.add(
@@ -50,7 +51,7 @@ class _LoadingDotState extends State<LoadingDot> with TickerProviderStateMixin {
         ),
       );
 
-      CancelableOperation.fromFuture(
+      async.CancelableOperation.fromFuture(
         Future.delayed(Duration(milliseconds: _beginTimes[i])).then((_) {
           listAnimationController[i].repeat();
           return 0;

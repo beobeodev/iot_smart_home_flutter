@@ -5,10 +5,11 @@ import 'package:iot_smart_home/core/theme/palette.dart';
 
 abstract class TextStyles {
   static final TextStyle headLine1 = TextStyle(
-      fontFamily: FontFamily.fontMulish,
-      fontWeight: FontWeight.w700,
-      fontSize: 20.sp,
-      color: Palette.darkCerulean500);
+    fontFamily: FontFamily.fontMulish,
+    fontWeight: FontWeight.w700,
+    fontSize: 20.sp,
+    color: Palette.darkCerulean500,
+  );
 
   static final TextStyle bodyText1 = TextStyle(
     fontFamily: FontFamily.fontMulish,

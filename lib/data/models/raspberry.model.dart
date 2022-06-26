@@ -2,18 +2,19 @@ import 'package:iot_smart_home/data/models/room.model.dart';
 import 'package:iot_smart_home/domain/entities/raspberry.entity.dart';
 
 class RaspberryModel extends RaspberryEntity {
-  const RaspberryModel(
-      {required String id,
-      required String ipMac,
-      String? customerName,
-      String? customerPhone,
-      required List<RoomModel> rooms})
-      : super(
-            id: id,
-            ipMac: ipMac,
-            customerName: customerName,
-            customerPhone: customerPhone,
-            rooms: rooms);
+  const RaspberryModel({
+    required String id,
+    required String ipMac,
+    String? customerName,
+    String? customerPhone,
+    required List<RoomModel> rooms,
+  }) : super(
+          id: id,
+          ipMac: ipMac,
+          customerName: customerName,
+          customerPhone: customerPhone,
+          rooms: rooms,
+        );
 
   factory RaspberryModel.fromJson(Map<String, dynamic> json) {
     return RaspberryModel(

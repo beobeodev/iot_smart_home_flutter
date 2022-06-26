@@ -7,8 +7,23 @@ import 'package:unicons/unicons.dart';
 class RootController extends GetxController {
   final Rx<RaspberryEntity> _currentRaspberry =
       (Get.arguments as RaspberryEntity).obs;
-
   RaspberryEntity get currentRaspberry => _currentRaspberry.value;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+  }
+
+  // Future<void> getData() async {
+  //   final String? ipMac = await getIpMacUseCase.execute();
+
+  //   try {
+  //     final RaspberryEntity raspberryState =
+  //         await getRaspberryByIpMacUseCase.execute(params: ipMac!);
+  //   } catch (e) {
+  //     log('Error in getData() from SplashController()');
+  //   }
+  // }
 
   final List<IconData> iconTabs = [
     UniconsLine.home_alt,

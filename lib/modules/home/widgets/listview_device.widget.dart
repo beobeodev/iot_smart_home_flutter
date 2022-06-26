@@ -9,19 +9,22 @@ class ListViewDevice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        'Thiết bị',
-        style: TextStyle(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Thiết bị',
+          style: TextStyle(
             fontFamily: FontFamily.fontMulish,
             fontWeight: FontWeight.w800,
             fontSize: 20.sp,
-            color: Palette.darkCerulean500),
-      ),
-      SizedBox(
-        width: double.infinity,
-        height: 120.h,
-        child: ListView.builder(
+            color: Palette.darkCerulean500,
+          ),
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 120.h,
+          child: ListView.builder(
             itemCount: 3,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.only(top: 16.h),
@@ -40,15 +43,18 @@ class ListViewDevice extends StatelessWidget {
                     Text(
                       'Đèn',
                       style: TextStyle(
-                          color: Palette.outerSpace400,
-                          fontFamily: FontFamily.fontMulish,
-                          fontSize: 14.sp),
+                        color: Palette.outerSpace400,
+                        fontFamily: FontFamily.fontMulish,
+                        fontSize: 14.sp,
+                      ),
                     )
                   ],
                 ),
               );
-            }),
-      ),
-    ]);
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

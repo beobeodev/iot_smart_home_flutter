@@ -18,78 +18,91 @@ class HomeScreen extends GetView<HomeController> {
         // width: MediaQuery.of(context).size.width,
         // height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.fromLTRB(
-            20.w, MediaQuery.of(context).padding.top + 10, 20.w, 80.h),
+          20.w,
+          MediaQuery.of(context).padding.top + 10,
+          20.w,
+          80.h,
+        ),
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [
-                  Palette.yellow200.withOpacity(0.4),
-                  Palette.ghostWhite
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [0.0, 0.3])),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Chào buổi sáng, Quốc Đạt',
+          gradient: LinearGradient(
+            colors: [Palette.yellow200.withOpacity(0.4), Palette.ghostWhite],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.0, 0.3],
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Chào buổi sáng, Quốc Đạt',
                       style: TextStyle(
-                          fontFamily: FontFamily.fontMulish,
-                          fontWeight: FontWeight.w800,
-                          color: Palette.outerSpace500,
-                          fontSize: 20.sp)),
-                  Text('Hãy luôn tiết kiệm điện!',
+                        fontFamily: FontFamily.fontMulish,
+                        fontWeight: FontWeight.w800,
+                        color: Palette.outerSpace500,
+                        fontSize: 20.sp,
+                      ),
+                    ),
+                    Text(
+                      'Hãy luôn tiết kiệm điện!',
                       style: TextStyle(
-                          fontFamily: FontFamily.fontMulish,
-                          fontWeight: FontWeight.w400,
-                          color: Palette.outerSpace300,
-                          fontSize: 14.sp))
-                ],
-              ),
-              Container(width: 50.w, height: 50.w, color: Colors.red)
-            ],
-          ),
-          SizedBox(
-            height: 24.h,
-          ),
-          const ContainerWeather(),
-          const SizedBox(
-            height: 30,
-          ),
-          Align(
-            child: TextButton(
-              onPressed: controller.onTapButtonRecord,
-              child: Obx(() => Icon(
-                    controller.isRecording ? Icons.pause : Icons.mic,
-                    color: Colors.white,
-                  )),
-              style: TextButton.styleFrom(
+                        fontFamily: FontFamily.fontMulish,
+                        fontWeight: FontWeight.w400,
+                        color: Palette.outerSpace300,
+                        fontSize: 14.sp,
+                      ),
+                    )
+                  ],
+                ),
+                Container(width: 50.w, height: 50.w, color: Colors.red)
+              ],
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
+            const ContainerWeather(),
+            const SizedBox(
+              height: 30,
+            ),
+            Align(
+              child: TextButton(
+                onPressed: controller.onTapButtonRecord,
+                style: TextButton.styleFrom(
                   backgroundColor: Palette.blue500,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  minimumSize: const Size(60, 60)),
+                  minimumSize: const Size(60, 60),
+                ),
+                child: Obx(
+                  () => Icon(
+                    controller.isRecording ? Icons.pause : Icons.mic,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
-          ),
-          // IconButton(
-          //     onPressed: () {},
+            // IconButton(
+            //     onPressed: () {},
 
-          //     icon: Icon(controller.isRecording ? Icons.pause : Icons.mic)),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
+            //     icon: Icon(controller.isRecording ? Icons.pause : Icons.mic)),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    ListViewDevice(),
-                    GridViewDevicesInRoom(),
-                  ]),
-            ),
-          )
-        ]),
+                  children: [const ListViewDevice(), GridViewDevicesInRoom()],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

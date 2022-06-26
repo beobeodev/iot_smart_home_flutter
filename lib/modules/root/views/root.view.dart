@@ -14,15 +14,17 @@ class RootScreen extends GetView<RootController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => IndexedStack(
-            index: controller.currentTabIndex,
-            children: const [
-              HomeScreen(),
-              RoomScreen(),
-              FavoriteScreen(),
-              ProfileScreen()
-            ],
-          )),
+      body: Obx(
+        () => IndexedStack(
+          index: controller.currentTabIndex,
+          children: const [
+            HomeScreen(),
+            RoomScreen(),
+            FavoriteScreen(),
+            ProfileScreen()
+          ],
+        ),
+      ),
       floatingActionButton: Container(
         height: 50.h,
         width: double.infinity,
@@ -34,19 +36,23 @@ class RootScreen extends GetView<RootController> {
           borderRadius: BorderRadius.circular(50.h),
         ),
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-                4,
-                (index) => Obx(() => IconButton(
-                      onPressed: () {
-                        controller.onPressTab(index);
-                      },
-                      padding: EdgeInsets.zero,
-                      icon: Icon(controller.iconTabs[index]),
-                      color: index == controller.currentTabIndex
-                          ? Palette.yellow500
-                          : Palette.blue300,
-                    )))),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(
+            4,
+            (index) => Obx(
+              () => IconButton(
+                onPressed: () {
+                  controller.onPressTab(index);
+                },
+                padding: EdgeInsets.zero,
+                icon: Icon(controller.iconTabs[index]),
+                color: index == controller.currentTabIndex
+                    ? Palette.yellow500
+                    : Palette.blue300,
+              ),
+            ),
+          ),
+        ),
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,

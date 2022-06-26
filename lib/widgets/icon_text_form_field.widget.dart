@@ -39,23 +39,25 @@ class IconTextFormField extends StatelessWidget {
     return TextFormField(
       controller: textController,
       decoration: InputDecoration(
-          fillColor: fillColor,
-          filled: true,
-          icon: CircleAvatar(
-            child: Icon(
-              icon,
-              size: iconSize.sp,
-              color: iconColor,
-            ),
-            backgroundColor: backgroundIconColor,
-            radius: 20.w,
+        fillColor: fillColor,
+        filled: true,
+        icon: CircleAvatar(
+          backgroundColor: backgroundIconColor,
+          radius: 20.w,
+          child: Icon(
+            icon,
+            size: iconSize.sp,
+            color: iconColor,
           ),
-          hintText: hintText,
-          hintStyle: TextStyle(
-              fontFamily: FontFamily.fontMulish,
-              fontSize: hintTextSize.sp,
-              color: Palette.lightGray),
-          border: border),
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          fontFamily: FontFamily.fontMulish,
+          fontSize: hintTextSize.sp,
+          color: Palette.lightGray,
+        ),
+        border: border,
+      ),
       style: TextStyle(
         color: Palette.darkCerulean500,
         fontSize: textSize.sp,

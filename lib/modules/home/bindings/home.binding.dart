@@ -9,10 +9,13 @@ import 'package:iot_smart_home/modules/root/controllers/root.controller.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => HomeController(
+    Get.lazyPut(
+      () => HomeController(
         rootController: Get.find<RootController>(),
         controlDigitalDeviceUseCase: getIt.get<ControlDigitalDeviceUseCase>(),
         predictBySpeechUseCase: getIt.get<PredictBySpeechUseCase>(),
-        getTempAndHumanUseCase: getIt.get<GetTempAndHumanUseCase>()));
+        getTempAndHumanUseCase: getIt.get<GetTempAndHumanUseCase>(),
+      ),
+    );
   }
 }

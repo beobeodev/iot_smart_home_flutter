@@ -18,14 +18,16 @@ class ContainerWeather extends GetView<HomeController> {
           height: 145.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Palette.aliceBlue,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    offset: const Offset(0, 6),
-                    blurRadius: 12)
-              ]),
+            color: Palette.aliceBlue,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                offset: const Offset(0, 6),
+                blurRadius: 12,
+              )
+            ],
+          ),
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,

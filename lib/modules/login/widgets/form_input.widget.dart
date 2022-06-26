@@ -10,9 +10,11 @@ class FormInput extends StatelessWidget {
   final TextEditingController ipController;
   final TextEditingController passController;
 
-  const FormInput(
-      {Key? key, required this.ipController, required this.passController})
-      : super(key: key);
+  const FormInput({
+    Key? key,
+    required this.ipController,
+    required this.passController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ class FormInput extends StatelessWidget {
       height: 160.h,
       padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.white),
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,7 +1,4 @@
-import 'dart:developer';
-
-import 'package:iot_smart_home/core/resouces/request_state.dart';
-import 'package:iot_smart_home/core/utils/http/exceptions.dart';
+import 'package:iot_smart_home/core/utils/dio/dio_provider.dart';
 import 'package:iot_smart_home/data/datasources/remote/raspberry.datasource.dart';
 import 'package:iot_smart_home/data/models/dht11.model.dart';
 import 'package:iot_smart_home/data/models/raspberry.model.dart';
@@ -9,82 +6,53 @@ import 'package:iot_smart_home/data/models/room.model.dart';
 import 'package:iot_smart_home/domain/repositories/iraspberry.repository.dart';
 
 class RaspberryRepository extends IRaspberryRepository {
-  final RaspberryDatasource datasource;
+  final RaspberryRemoteDatasource remoteDatasource;
 
-  RaspberryRepository({required this.datasource});
-
-  RaspberryModel? raspberry;
+  RaspberryRepository({required this.remoteDatasource});
 
   @override
-  Future<RequestState<RaspberryModel>> getRaspberryByIpMac(String ipMac) async {
-    try {
-      raspberry ??= await datasource.getRaspberryByIpMac(ipMac);
+  Future<RaspberryModel> getRaspberryByIpMac(String ipMac) async {
+    final HttpRequestResponse getRaspResponse =
+        await remoteDatasource.getRaspberryByIpMac(ipMac);
 
-      return RequestSuccess(raspberry!);
-    } on AppException catch (e) {
-      return RequestFailed(e);
-    } catch (e) {
-      return RequestFailed(
-          AppException(status: 'Undefined', message: e.toString()));
-    }
+    return RaspberryModel.fromJson(getRaspResponse.data);
   }
 
   @override
-  Future<RequestState<RoomModel>> addRoomToRasp(
-      Map<String, dynamic> formBody) async {
-    try {
-      final RoomModel room = await datasource.addRoomToRasp(formBody);
-      return RequestSuccess(room);
-    } on AppException catch (e) {
-      return RequestFailed(e);
-    } catch (e) {
-      return RequestFailed(
-          AppException(status: 'Undefined', message: e.toString()));
-    }
+  Future<RoomModel> addRoomToRasp(
+    Map<String, dynamic> formBody,
+  ) async {
+    final HttpRequestResponse addRoomResponse =
+        await remoteDatasource.addRoomToRasp(formBody);
+
+    return RoomModel.fromJson(addRoomResponse.data);
   }
 
   @override
-  Future<RequestState<Map<String, dynamic>>> controlDigitalDevice(
-      Map<String, dynamic> formBody) async {
-    try {
-      final Map<String, dynamic> controlStatus =
-          await datasource.controlDigitalDevice(formBody);
-      log(controlStatus.toString());
-      return RequestSuccess(controlStatus);
-    } on AppException catch (e) {
-      return RequestFailed(e);
-    } catch (e) {
-      return RequestFailed(
-          AppException(status: 'Undefined', message: e.toString()));
-    }
+  Future<Map<String, dynamic>> controlDigitalDevice(
+    Map<String, dynamic> formBody,
+  ) async {
+    final HttpRequestResponse controlResponse =
+        await remoteDatasource.controlDigitalDevice(formBody);
+
+    return controlResponse.data;
   }
 
   @override
-  Future<RequestState<Map<String, dynamic>>> predictBySpeech(
-      Map<String, dynamic> formBody) async {
-    try {
-      final Map<String, dynamic> controlStatus =
-          await datasource.predictBySpeech(formBody);
-      return RequestSuccess(controlStatus);
-    } on AppException catch (e) {
-      return RequestFailed(e);
-    } catch (e) {
-      return RequestFailed(
-          AppException(status: 'Undefined', message: e.toString()));
-    }
+  Future<Map<String, dynamic>> predictBySpeech(
+    Map<String, dynamic> formBody,
+  ) async {
+    final HttpRequestResponse predictResponse =
+        await remoteDatasource.predictBySpeech(formBody);
+
+    return predictResponse.data;
   }
 
   @override
-  Future<RequestState<DHT11Model>> getTempAndHuman() async {
-    try {
-      final DHT11Model dht11model = await datasource.getTempAndHuman();
+  Future<DHT11Model> getTempAndHuman() async {
+    final HttpRequestResponse dht11Response =
+        await remoteDatasource.getTempAndHuman();
 
-      return RequestSuccess(dht11model);
-    } on AppException catch (e) {
-      return RequestFailed(e);
-    } catch (e) {
-      return RequestFailed(
-          AppException(status: 'Undefined', message: e.toString()));
-    }
+    return DHT11Model.fromJson(dht11Response.data);
   }
 }

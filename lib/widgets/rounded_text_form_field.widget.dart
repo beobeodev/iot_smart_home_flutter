@@ -17,17 +17,17 @@ class RoundedTextFormField extends StatelessWidget {
 
   final double radius;
 
-  const RoundedTextFormField(
-      {Key? key,
-      this.textController,
-      this.textInputType,
-      this.onChanged,
-      this.validator,
-      this.hintText,
-      this.errorText,
-      this.initValue,
-      this.radius = 100})
-      : super(key: key);
+  const RoundedTextFormField({
+    Key? key,
+    this.textController,
+    this.textInputType,
+    this.onChanged,
+    this.validator,
+    this.hintText,
+    this.errorText,
+    this.initValue,
+    this.radius = 100,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,32 +38,37 @@ class RoundedTextFormField extends StatelessWidget {
       keyboardType: textInputType,
       initialValue: initValue,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
-          filled: true,
-          fillColor: Colors.white,
-          hintText: hintText,
-          hintStyle: TextStyles.bodyText1.copyWith(color: Palette.lightGray),
-          errorText: errorText,
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: const BorderSide(
-                color: Palette.blue400,
-              )),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: const BorderSide(
-                color: Palette.blue400,
-              )),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: const BorderSide(
-                color: Colors.red,
-              )),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: const BorderSide(
-                color: Palette.blue400,
-              ))),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
+        filled: true,
+        fillColor: Colors.white,
+        hintText: hintText,
+        hintStyle: TextStyles.bodyText1.copyWith(color: Palette.lightGray),
+        errorText: errorText,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(
+            color: Palette.blue400,
+          ),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(
+            color: Palette.blue400,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(
+            color: Palette.blue400,
+          ),
+        ),
+      ),
       style: TextStyles.bodyText1,
     );
   }

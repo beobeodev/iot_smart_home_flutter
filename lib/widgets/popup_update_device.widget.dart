@@ -10,9 +10,11 @@ class PopupUpdateDevice extends StatefulWidget {
   final void Function(DeviceEntity) addDeviceToList;
   final DeviceEntity? device;
 
-  const PopupUpdateDevice(
-      {Key? key, required this.addDeviceToList, this.device})
-      : super(key: key);
+  const PopupUpdateDevice({
+    Key? key,
+    required this.addDeviceToList,
+    this.device,
+  }) : super(key: key);
 
   @override
   State<PopupUpdateDevice> createState() => _PopupUpdateDeviceState();
@@ -67,9 +69,10 @@ class _PopupUpdateDeviceState extends State<PopupUpdateDevice> {
             decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
-                    color: Palette.blue200,
-                    offset: Offset(0, 1),
-                    blurRadius: 18)
+                  color: Palette.blue200,
+                  offset: Offset(0, 1),
+                  blurRadius: 18,
+                )
               ],
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -78,43 +81,49 @@ class _PopupUpdateDeviceState extends State<PopupUpdateDevice> {
             child: Form(
               key: keyPopup,
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RoundedTextFormField(
-                      hintText: 'Tên thiết bị',
-                      initValue: device.name,
-                      validator: validateName,
-                      onChanged: (value) {
-                        device.name = value;
-                      },
-                    ),
-                    RoundedTextFormField(
-                      hintText: 'Số cổng',
-                      initValue: device.gate?.toString(),
-                      validator: validateGate,
-                      textInputType: TextInputType.number,
-                      onChanged: (value) {
-                        device.gate = int.parse(value);
-                      },
-                    ),
-                    TextButton(
-                      onPressed: onTapUpdate,
-                      child: Text(
-                        widget.device != null ? 'Cập nhật' : 'Thêm thiết bị',
-                        style: TextStyle(
-                            fontFamily: FontFamily.fontMulish,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18.sp,
-                            color: Colors.white),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RoundedTextFormField(
+                    hintText: 'Tên thiết bị',
+                    initValue: device.name,
+                    validator: validateName,
+                    onChanged: (value) {
+                      device.name = value;
+                    },
+                  ),
+                  RoundedTextFormField(
+                    hintText: 'Số cổng',
+                    initValue: device.gate?.toString(),
+                    validator: validateGate,
+                    textInputType: TextInputType.number,
+                    onChanged: (value) {
+                      device.gate = int.parse(value);
+                    },
+                  ),
+                  TextButton(
+                    onPressed: onTapUpdate,
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 10,
                       ),
-                      style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 10),
-                          backgroundColor: Palette.blue300,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100))),
-                    )
-                  ]),
+                      backgroundColor: Palette.blue300,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                    child: Text(
+                      widget.device != null ? 'Cập nhật' : 'Thêm thiết bị',
+                      style: TextStyle(
+                        fontFamily: FontFamily.fontMulish,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18.sp,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         )

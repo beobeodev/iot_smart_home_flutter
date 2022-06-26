@@ -8,9 +8,12 @@ import 'package:iot_smart_home/modules/login/controllers/login.controller.dart';
 class LoginBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginController>(() => LoginController(
+    Get.lazyPut<LoginController>(
+      () => LoginController(
         loginUseCase: getIt.get<LoginUseCase>(),
         setLoggedInUseCase: getIt.get<SetLoggedInUseCase>(),
-        saveIpMacUseCase: getIt.get<SaveIpMacUseCase>()));
+        saveIpMacUseCase: getIt.get<SaveIpMacUseCase>(),
+      ),
+    );
   }
 }

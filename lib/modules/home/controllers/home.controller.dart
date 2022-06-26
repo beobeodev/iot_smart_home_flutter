@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:iot_smart_home/core/resouces/request_state.dart';
 import 'package:iot_smart_home/core/utils/audio/record_audio.util.dart';
+import 'package:iot_smart_home/domain/entities/device.entity.dart';
 import 'package:iot_smart_home/domain/entities/dht11.entity.dart';
 import 'package:iot_smart_home/domain/entities/room.entity.dart';
 import 'package:iot_smart_home/domain/usecases/raspberry/control_digital_device.usecase.dart';
@@ -16,11 +16,12 @@ class HomeController extends GetxController {
   final PredictBySpeechUseCase predictBySpeechUseCase;
   final GetTempAndHumanUseCase getTempAndHumanUseCase;
 
-  HomeController(
-      {required this.rootController,
-      required this.controlDigitalDeviceUseCase,
-      required this.predictBySpeechUseCase,
-      required this.getTempAndHumanUseCase});
+  HomeController({
+    required this.rootController,
+    required this.controlDigitalDeviceUseCase,
+    required this.predictBySpeechUseCase,
+    required this.getTempAndHumanUseCase,
+  });
 
   late Rx<RoomEntity> _currentRoom;
   RoomEntity get currentRoom => _currentRoom.value;
@@ -35,7 +36,10 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _currentRoom = rootController.currentRaspberry.rooms[0].obs;
+
+    if (rootController.currentRaspberry.rooms.isNotEmpty) {
+      _currentRoom = rootController.currentRaspberry.rooms[0].obs;
+    }
   }
 
   void onChangeDropdownRoom(idSelectedRoom) {
@@ -44,20 +48,25 @@ class HomeController extends GetxController {
     _currentRoom.value = selectedRoom;
   }
 
-  Future<void> changeDigitalDevice(int deviceIndex) async {
+  Future<void> controlDigitalDevice(int deviceIndex) async {
     final Map<String, dynamic> passedData = {
       'ip_mac': rootController.currentRaspberry.ipMac,
       'gate': currentRoom.devices[deviceIndex].gate,
       'command': currentRoom.devices[deviceIndex].status ? 0 : 1,
     };
 
-    final RequestState<Map<String, dynamic>> controlState =
-        await controlDigitalDeviceUseCase.execute(params: passedData);
-    if (controlState is RequestFailed) {
-      log(controlState.error.toString());
-    } else {
-      currentRoom.devices[deviceIndex].status =
-          !currentRoom.devices[deviceIndex].status;
+    try {
+      final Map<String, dynamic> controlState =
+          await controlDigitalDeviceUseCase.execute(params: passedData);
+
+      final List<DeviceEntity> tempDevices = List.from(currentRoom.devices);
+      tempDevices[deviceIndex].status = !tempDevices[deviceIndex].status;
+
+      _currentRoom.update((val) {
+        val?.devices = tempDevices;
+      });
+    } catch (e) {
+      log('Error in controlDigitalDevice() from HomeController: #e');
     }
   }
 
@@ -65,33 +74,32 @@ class HomeController extends GetxController {
     log(isRecording.toString());
 
     if (isRecording) {
-      final String audioPath = await RecordAudio.stopRecord();
-      final String base64Audio = await RecordAudio.getBase64Audio(audioPath);
-      final RequestState<Map<String, dynamic>> predictState =
-          await predictBySpeechUseCase.execute(params: {
-        'ipMac': rootController.currentRaspberry.ipMac,
-        'fileCode': base64Audio,
-      });
-
-      if (predictState is RequestFailed) {
-        log(predictState.error.toString());
-      } else {
-        log('onTapButtonRecord success');
+      try {
+        final String audioPath = await RecordAudio.stopRecord();
+        final String base64Audio = await RecordAudio.getBase64Audio(audioPath);
+        final Map<String, dynamic> predictResult =
+            await predictBySpeechUseCase.execute(
+          params: {
+            'ipMac': rootController.currentRaspberry.ipMac,
+            'fileCode': base64Audio,
+          },
+        );
+      } catch (e) {
+        log('Error in onTapButtonRecord() from HomeController: $e');
       }
     } else {
       await RecordAudio.startRecord();
     }
+
     _isRecording.value = !_isRecording.value;
   }
 
   Future<void> getTempAndHuman() async {
-    final RequestState<DHT11Entity> dht11State =
-        await getTempAndHumanUseCase.execute();
-    if (dht11State is RequestSuccess) {
-      _currentDTH11.value = dht11State.data!;
-      log(dht11State.data.toString());
-    } else {
-      log(dht11State.error.toString());
+    try {
+      final DHT11Entity dht11State = await getTempAndHumanUseCase.execute();
+      _currentDTH11.value = dht11State;
+    } catch (e) {
+      log('Error in getTempAndHuman() from HomeController: $e');
     }
   }
 }

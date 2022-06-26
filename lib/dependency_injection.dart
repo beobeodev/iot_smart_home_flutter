@@ -20,43 +20,64 @@ final GetIt getIt = GetIt.instance;
 
 void initDependencies() {
   // AUTHENTICATION
-  getIt.registerLazySingleton(() => AuthenticationDatasource());
-  getIt.registerLazySingleton(() => AuthenticationRepository(
-      datasource: getIt.get<AuthenticationDatasource>()));
+  getIt.registerLazySingleton(() => AuthenticationRemoteDatasource());
+  getIt.registerLazySingleton(
+    () => AuthenticationRepository(
+      datasource: getIt.get<AuthenticationRemoteDatasource>(),
+    ),
+  );
 
   // HIVE LOCAL DATABASE
   getIt.registerLazySingleton(() => HiveLocalDatatasource());
-  getIt.registerLazySingleton(() =>
-      HiveLocalRepository(datatasource: getIt.get<HiveLocalDatatasource>()));
+  getIt.registerLazySingleton(
+    () => HiveLocalRepository(datatasource: getIt.get<HiveLocalDatatasource>()),
+  );
 
   // RASPBERRY
-  getIt.registerLazySingleton(() => RaspberryDatasource());
+  getIt.registerLazySingleton(() => RaspberryRemoteDatasource());
   getIt.registerLazySingleton(
-      () => RaspberryRepository(datasource: getIt.get<RaspberryDatasource>()));
+    () => RaspberryRepository(
+      remoteDatasource: getIt.get<RaspberryRemoteDatasource>(),
+    ),
+  );
 
   // USE CASES
   getIt.registerLazySingleton(
-      () => LoginUseCase(repository: getIt.get<AuthenticationRepository>()));
+    () => LoginUseCase(repository: getIt.get<AuthenticationRepository>()),
+  );
   getIt.registerLazySingleton(
-      () => SetLoggedInUseCase(repository: getIt.get<HiveLocalRepository>()));
+    () => SetLoggedInUseCase(repository: getIt.get<HiveLocalRepository>()),
+  );
   getIt.registerLazySingleton(
-      () => CheckLoggedInUseCase(repository: getIt.get<HiveLocalRepository>()));
+    () => CheckLoggedInUseCase(repository: getIt.get<HiveLocalRepository>()),
+  );
 
   getIt.registerLazySingleton(
-      () => SaveIpMacUseCase(repository: getIt.get<HiveLocalRepository>()));
+    () => SaveIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
+  );
   getIt.registerLazySingleton(
-      () => GetIpMacUseCase(repository: getIt.get<HiveLocalRepository>()));
+    () => GetIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
+  );
 
-  getIt.registerLazySingleton(() =>
-      GetRaspberryByIpMacUseCase(repository: getIt.get<RaspberryRepository>()));
   getIt.registerLazySingleton(
-      () => AddRoomToRaspUseCase(repository: getIt.get<RaspberryRepository>()));
-  getIt.registerLazySingleton(() => ControlDigitalDeviceUseCase(
-      repository: getIt.get<RaspberryRepository>()));
+    () => GetRaspberryByIpMacUseCase(
+      repository: getIt.get<RaspberryRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => AddRoomToRaspUseCase(repository: getIt.get<RaspberryRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => ControlDigitalDeviceUseCase(
+      repository: getIt.get<RaspberryRepository>(),
+    ),
+  );
 
-  getIt.registerLazySingleton(() =>
-      PredictBySpeechUseCase(repository: getIt.get<RaspberryRepository>()));
+  getIt.registerLazySingleton(
+    () => PredictBySpeechUseCase(repository: getIt.get<RaspberryRepository>()),
+  );
 
-  getIt.registerLazySingleton(() =>
-      GetTempAndHumanUseCase(repository: getIt.get<RaspberryRepository>()));
+  getIt.registerLazySingleton(
+    () => GetTempAndHumanUseCase(repository: getIt.get<RaspberryRepository>()),
+  );
 }

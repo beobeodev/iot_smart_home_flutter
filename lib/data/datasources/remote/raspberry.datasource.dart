@@ -1,51 +1,48 @@
-import 'package:iot_smart_home/core/utils/http/http_provider.dart';
-import 'package:iot_smart_home/data/models/dht11.model.dart';
-import 'package:iot_smart_home/data/models/raspberry.model.dart';
-import 'package:iot_smart_home/data/models/room.model.dart';
+import 'package:iot_smart_home/core/utils/dio/dio_provider.dart';
 
-abstract class IRaspberryDatasource {
-  Future<RaspberryModel> getRaspberryByIpMac(String ipMac);
-  Future<RoomModel> addRoomToRasp(Map<String, dynamic> formBody);
-  Future<Map<String, dynamic>> controlDigitalDevice(
-      Map<String, dynamic> formBody);
+abstract class IRaspberryRemoteDatasource {
+  Future<HttpRequestResponse> getRaspberryByIpMac(String ipMac);
+  Future<HttpRequestResponse> addRoomToRasp(Map<String, dynamic> formBody);
+  Future<HttpRequestResponse> controlDigitalDevice(
+    Map<String, dynamic> formBody,
+  );
 
-  Future<Map<String, dynamic>> predictBySpeech(Map<String, dynamic> formBody);
-  Future<DHT11Model> getTempAndHuman();
+  Future<HttpRequestResponse> predictBySpeech(Map<String, dynamic> formBody);
+  Future<HttpRequestResponse> getTempAndHuman();
 }
 
-class RaspberryDatasource implements IRaspberryDatasource {
+class RaspberryRemoteDatasource implements IRaspberryRemoteDatasource {
   @override
-  Future<RaspberryModel> getRaspberryByIpMac(String ipMac) async {
-    final dynamic rawData = await HttpProvider.get('/ras/$ipMac');
-    return RaspberryModel.fromJson(rawData);
+  Future<HttpRequestResponse> getRaspberryByIpMac(String ipMac) async {
+    return await DioProvider.get(url: '/ras/$ipMac');
   }
 
   @override
-  Future<RoomModel> addRoomToRasp(Map<String, dynamic> formBody) async {
-    final dynamic rawData = await HttpProvider.patch('/ras/add_room', formBody);
-    return RoomModel.fromJson(rawData);
+  Future<HttpRequestResponse> addRoomToRasp(
+    Map<String, dynamic> formBody,
+  ) async {
+    return await DioProvider.patch(url: '/ras/add_room', formBody: formBody);
   }
 
   @override
-  Future<Map<String, dynamic>> controlDigitalDevice(
-      Map<String, dynamic> formBody) async {
-    final dynamic rawData =
-        await HttpProvider.post('/api/control_digital', formBody);
-    return rawData;
+  Future<HttpRequestResponse> controlDigitalDevice(
+    Map<String, dynamic> formBody,
+  ) async {
+    return await DioProvider.post(
+      url: '/api/control_digital',
+      formBody: formBody,
+    );
   }
 
   @override
-  Future<Map<String, dynamic>> predictBySpeech(
-      Map<String, dynamic> formBody) async {
-    final Map<String, dynamic> rawData =
-        await HttpProvider.post('/api/ras_predict', formBody);
-    return rawData;
+  Future<HttpRequestResponse> predictBySpeech(
+    Map<String, dynamic> formBody,
+  ) async {
+    return await DioProvider.post(url: '/api/ras_predict', formBody: formBody);
   }
 
   @override
-  Future<DHT11Model> getTempAndHuman() async {
-    final Map<String, dynamic> rawData =
-        await HttpProvider.get('/api/get_temp_and_humi');
-    return DHT11Model.fromJson(rawData);
+  Future<HttpRequestResponse> getTempAndHuman() async {
+    return await DioProvider.get(url: '/api/get_temp_and_humi');
   }
 }

@@ -24,21 +24,27 @@ class RouteManager {
 
   static List<GetPage> pages = [
     GetPage(
-        name: splash,
-        page: () => const SplashScreen(),
-        binding: SplashBinding()),
+      name: splash,
+      page: () => const SplashScreen(),
+      binding: SplashBinding(),
+    ),
     GetPage(
-        name: login, page: () => const LoginScreen(), binding: LoginBinding()),
+      name: login,
+      page: () => const LoginScreen(),
+      binding: LoginBinding(),
+    ),
     GetPage(
-        name: root,
-        page: () => const RootScreen(),
-        bindings: [RootBinding(), HomeBinding(), RoomBinding()]),
+      name: root,
+      page: () => const RootScreen(),
+      bindings: [RootBinding(), HomeBinding(), RoomBinding()],
+    ),
     GetPage(name: home, page: () => const HomeScreen()),
     GetPage(name: room, page: () => const RoomScreen()),
     GetPage(
-        name: createRoom,
-        page: () => const CreateRoomScreen(),
-        binding: CreateRoomBinding()),
+      name: createRoom,
+      page: () => const CreateRoomScreen(),
+      binding: CreateRoomBinding(),
+    ),
     GetPage(name: controlLight, page: () => const ControlLighScreen()),
   ];
 }
