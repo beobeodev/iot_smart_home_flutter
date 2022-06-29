@@ -40,7 +40,7 @@ class LoginScreen extends GetView<LoginController> {
                         child: Container(
                           width: 364.w,
                           height: 430.h,
-                          padding: EdgeInsets.only(top: 100.h, bottom: 60.h),
+                          padding: EdgeInsets.only(top: 100.h, bottom: 20.h),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
                               colors: [
@@ -55,10 +55,7 @@ class LoginScreen extends GetView<LoginController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FormInput(
-                                ipController: controller.ipController,
-                                passController: controller.passController,
-                              ),
+                              const FormInput(),
                               TextButton(
                                 onPressed: controller.login,
                                 style: TextButton.styleFrom(

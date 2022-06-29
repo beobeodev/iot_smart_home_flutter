@@ -31,7 +31,7 @@ class SplashController extends GetxController {
     } else {
       AuthorizationUtil.ipMac = ipMac;
       // await getData();
-      await managerController.getData();
+      await managerController.getRaspberry();
       Get.offAllNamed(RouteManager.root);
     }
   }

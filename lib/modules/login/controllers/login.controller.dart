@@ -22,10 +22,32 @@ class LoginController extends GetxController {
   final TextEditingController ipController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
+  // Validate login form
+  final GlobalKey<FormState> loginFormKey = GlobalKey();
+  RxString errorText = ''.obs;
+
   final RxBool isProcessing = false.obs;
+
+  String? validateIp(String? value) {
+    if (value == '') {
+      return 'Vui lòng nhập tài khoản';
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    if (value == '') {
+      return 'Vui lòng nhập mật khẩu';
+    }
+    return null;
+  }
 
   Future<void> login() async {
     // Get.offAllNamed(RouteManager.root);
+    if (!loginFormKey.currentState!.validate()) {
+      return;
+    }
+
     if (isProcessing.value) {
       return;
     }
@@ -43,7 +65,7 @@ class LoginController extends GetxController {
 
       await saveDataAfterLogin(raspberryEntity);
 
-      managerController.currentRaspberry = raspberryEntity;
+      managerController.setRaspberry(raspberryEntity);
 
       Get.offAllNamed(RouteManager.root);
     } catch (e) {
@@ -56,44 +78,4 @@ class LoginController extends GetxController {
   Future<void> saveDataAfterLogin(RaspberryEntity raspberryEntity) async {
     await setIpMacUseCase.execute(params: raspberryEntity.ipMac);
   }
-
-  // void handleError(RequestFailed<RaspberryEntity> state) {
-  //   log(state.error.toString());
-  //   if (state.error is UnauthorisedException) {
-  //     Get.snackbar(
-  //       '',
-  //       '',
-  //       icon: const Icon(Icons.warning, color: Colors.yellow),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       borderColor: Colors.red,
-  //       borderWidth: 1,
-  //       backgroundColor: Colors.white,
-  //       borderRadius: 10,
-  //       margin: const EdgeInsets.all(15),
-  //       padding: const EdgeInsets.symmetric(vertical: 5),
-  //       colorText: Colors.red,
-  //       duration: const Duration(seconds: 4),
-  //       isDismissible: true,
-  //       dismissDirection: DismissDirection.horizontal,
-  //       forwardAnimationCurve: Curves.easeOutBack,
-  //       messageText: Text(
-  //         LocaleKeys.error_incorrect_ip_password.tr,
-  //         style: TextStyle(
-  //           fontFamily: FontFamily.fontMulish,
-  //           fontSize: 17.sp,
-  //           color: Colors.red,
-  //         ),
-  //       ),
-  //       titleText: Text(
-  //         LocaleKeys.text_warning.tr,
-  //         style: TextStyle(
-  //           fontFamily: FontFamily.fontMulish,
-  //           fontWeight: FontWeight.w800,
-  //           fontSize: 17.sp,
-  //           color: Colors.red,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
 }

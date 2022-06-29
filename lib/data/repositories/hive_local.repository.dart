@@ -15,4 +15,9 @@ class HiveLocalRepository implements IHiveLocalRepository {
   Future<String?> getIpMac() async {
     return await datatasource.getIpMac();
   }
+
+  @override
+  Future<void> deleteIpMac() async {
+    return await datatasource.deleteIpMac();
+  }
 }

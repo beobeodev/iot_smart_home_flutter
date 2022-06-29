@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iot_smart_home/core/router/route_manager.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
+import 'package:iot_smart_home/modules/profile/controllers/profile.controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,9 +18,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             TextButton(
-              onPressed: () {
-                Get.offAllNamed(RouteManager.login);
-              },
+              onPressed: controller.logout,
               style: TextButton.styleFrom(
                 backgroundColor: Palette.blue200,
                 fixedSize: const Size(double.infinity, 50),

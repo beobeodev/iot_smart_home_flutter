@@ -11,7 +11,7 @@ class ManagerController {
 
   late RaspberryEntity currentRaspberry;
 
-  Future<void> getData() async {
+  Future<void> getRaspberry() async {
     try {
       final RaspberryEntity raspberry = await getRaspberryByIpMacUseCase
           .execute(params: AuthorizationUtil.ipMac);
@@ -21,5 +21,9 @@ class ManagerController {
     } catch (e) {
       log('Error in getData() from RootController()');
     }
+  }
+
+  void setRaspberry(RaspberryEntity newRaspberry) {
+    currentRaspberry = newRaspberry;
   }
 }

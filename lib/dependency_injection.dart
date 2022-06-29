@@ -6,13 +6,7 @@ import 'package:iot_smart_home/data/repositories/authentication.repository.dart'
 import 'package:iot_smart_home/data/repositories/hive_local.repository.dart';
 import 'package:iot_smart_home/data/repositories/raspberry.repository.dart';
 import 'package:iot_smart_home/domain/usecases/authentication/login.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/add_room_to_rasp.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/control_digital_device.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/get_ip_mac.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/get_raspberry_by_ipmac.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/get_temp_human.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/predict_by_speech.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/set_ip_mac.usecase.dart';
+import 'package:iot_smart_home/domain/usecases/raspberry/raspberry.usecase.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -49,6 +43,9 @@ void initDependencies() {
   );
   getIt.registerLazySingleton(
     () => GetIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => DeleteIpMacUseCase(repository: getIt.get<HiveLocalRepository>()),
   );
 
   getIt.registerLazySingleton(

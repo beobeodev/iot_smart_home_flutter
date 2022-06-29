@@ -4,6 +4,7 @@ import 'package:iot_smart_home/modules/home/views/home.view.dart';
 import 'package:iot_smart_home/modules/home/views/light_control_screen.dart';
 import 'package:iot_smart_home/modules/login/bindings/login.binding.dart';
 import 'package:iot_smart_home/modules/login/views/login.view.dart';
+import 'package:iot_smart_home/modules/profile/bindings/profile.binding.dart';
 import 'package:iot_smart_home/modules/room/bindings/create_room.binding.dart';
 import 'package:iot_smart_home/modules/room/bindings/room.binding.dart';
 import 'package:iot_smart_home/modules/room/views/create_room.view.dart';
@@ -36,7 +37,7 @@ class RouteManager {
     GetPage(
       name: root,
       page: () => const RootScreen(),
-      bindings: [RootBinding(), HomeBinding(), RoomBinding()],
+      bindings: [RootBinding(), HomeBinding(), RoomBinding(), ProfileBinding()],
     ),
     GetPage(name: home, page: () => const HomeScreen()),
     GetPage(name: room, page: () => const RoomScreen()),

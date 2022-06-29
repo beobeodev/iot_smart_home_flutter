@@ -7,6 +7,7 @@ abstract class IHiveLocalDatasource {
   Future<Box> openAuthBox();
   Future<void> setIpMac(String ipMac);
   Future<String?> getIpMac();
+  Future<void> deleteIpMac();
 }
 
 class HiveLocalDatatasource implements IHiveLocalDatasource {
@@ -25,5 +26,11 @@ class HiveLocalDatatasource implements IHiveLocalDatasource {
   Future<String?> getIpMac() async {
     final Box authBox = await openAuthBox();
     return authBox.get(KeyBoxHive.ipMac);
+  }
+
+  @override
+  Future<void> deleteIpMac() async {
+    final Box authBox = await openAuthBox();
+    return await authBox.delete(KeyBoxHive.ipMac);
   }
 }

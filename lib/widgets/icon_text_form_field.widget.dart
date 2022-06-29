@@ -15,8 +15,8 @@ class IconTextFormField extends StatelessWidget {
   final Color backgroundIconColor;
   final bool isObsecure;
   final InputBorder border;
-
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
 
   const IconTextFormField({
     Key? key,
@@ -25,13 +25,14 @@ class IconTextFormField extends StatelessWidget {
     this.hintText,
     this.hintTextSize = 17,
     this.textSize = 17,
-    this.onChanged,
     this.icon,
     this.iconSize = 22,
     this.iconColor = Palette.yellow500,
     this.backgroundIconColor = Palette.lightGray,
     this.isObsecure = false,
     this.border = InputBorder.none,
+    this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -57,6 +58,12 @@ class IconTextFormField extends StatelessWidget {
           color: Palette.lightGray,
         ),
         border: border,
+        errorText: '',
+        errorStyle: TextStyle(
+          color: Colors.red,
+          fontFamily: FontFamily.fontMulish,
+          fontSize: 14.sp,
+        ),
       ),
       style: TextStyle(
         color: Palette.darkCerulean500,
@@ -65,6 +72,7 @@ class IconTextFormField extends StatelessWidget {
       ),
       onChanged: onChanged,
       obscureText: isObsecure,
+      validator: validator,
     );
   }
 }
