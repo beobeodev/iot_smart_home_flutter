@@ -13,85 +13,90 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        // padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.asset(
-                AssetPath.imageSmartHome,
-                height: 120.h,
-              ),
-              SizedBox(
-                height: ScreenUtil().screenHeight -
-                    120.h -
-                    MediaQuery.of(context).padding.top,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      top: 220.h,
-                      child: Container(
-                        width: 364.w,
-                        height: 430.h,
-                        padding: EdgeInsets.only(top: 100.h, bottom: 60.h),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              Palette.yellow200,
-                              Palette.blue200,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FormInput(
-                              ipController: controller.ipController,
-                              passController: controller.passController,
-                            ),
-                            TextButton(
-                              onPressed: controller.login,
-                              style: TextButton.styleFrom(
-                                backgroundColor: Palette.blue300,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.h),
-                                ),
-                                fixedSize: Size(180.w, 50.h),
-                              ),
-                              child: Text(
-                                LocaleKeys.button_login.tr,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: FontFamily.fontMulish,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 20.sp,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Image.asset(
-                        AssetPath.imageRoom,
-                      ),
-                    ),
-                  ],
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        body: SafeArea(
+          // padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(
+                  AssetPath.imageSmartHome,
+                  height: 120.h,
                 ),
-              )
-            ],
+                SizedBox(
+                  height: ScreenUtil().screenHeight -
+                      120.h -
+                      MediaQuery.of(context).padding.top,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        top: 220.h,
+                        child: Container(
+                          width: 364.w,
+                          height: 430.h,
+                          padding: EdgeInsets.only(top: 100.h, bottom: 60.h),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Palette.yellow200,
+                                Palette.blue200,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FormInput(
+                                ipController: controller.ipController,
+                                passController: controller.passController,
+                              ),
+                              TextButton(
+                                onPressed: controller.login,
+                                style: TextButton.styleFrom(
+                                  backgroundColor: Palette.blue300,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.h),
+                                  ),
+                                  fixedSize: Size(180.w, 50.h),
+                                ),
+                                child: Text(
+                                  LocaleKeys.button_login.tr,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: FontFamily.fontMulish,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          AssetPath.imageRoom,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
+        backgroundColor: Colors.white,
       ),
-      backgroundColor: Colors.white,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iot_smart_home/core/router/route_manager.dart';
 import 'package:iot_smart_home/generated/locales.g.dart';
+import 'package:iot_smart_home/modules/root/bindings/manager.binding.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           getPages: RouteManager.pages,
           initialRoute: RouteManager.splash,
           translationsKeys: AppTranslation.translations,
+          initialBinding: ManagerBinding(),
           fallbackLocale: const Locale('vi', 'VN'),
           locale: Get.deviceLocale,
         );

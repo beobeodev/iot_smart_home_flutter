@@ -5,7 +5,6 @@ import 'package:iot_smart_home/core/constants/font_family.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
 import 'package:iot_smart_home/modules/home/controllers/home.controller.dart';
 import 'package:iot_smart_home/modules/home/widgets/gridview_devices_in_room.widget.dart';
-import 'package:iot_smart_home/modules/home/widgets/listview_device.widget.dart';
 import 'package:iot_smart_home/modules/home/widgets/container_weather.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -89,6 +88,9 @@ class HomeScreen extends GetView<HomeController> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 30,
+            ),
             // IconButton(
             //     onPressed: () {},
 
@@ -97,7 +99,7 @@ class HomeScreen extends GetView<HomeController> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [const ListViewDevice(), GridViewDevicesInRoom()],
+                  children: [GridViewDevicesInRoom()],
                 ),
               ),
             )

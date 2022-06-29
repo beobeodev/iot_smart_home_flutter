@@ -29,7 +29,7 @@ class _PopupUpdateDeviceState extends State<PopupUpdateDevice> {
   void initState() {
     super.initState();
 
-    device = widget.device ?? DeviceEntity(name: '');
+    device = widget.device ?? DeviceEntity(id: '', name: '');
   }
 
   String? validateName(String? value) {

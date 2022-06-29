@@ -1,9 +1,15 @@
 class DeviceEntity {
+  String id;
   String name;
   int? gate;
   bool status;
 
-  DeviceEntity({required this.name, this.gate, this.status = false});
+  DeviceEntity({
+    required this.id,
+    required this.name,
+    this.gate,
+    this.status = false,
+  });
 
   // factory DeviceEntity.fromJson(Map<String, dynamic> json) {
   //   return DeviceEntity(
@@ -19,8 +25,9 @@ class DeviceEntity {
         'status': status,
       };
 
-  DeviceEntity copyWith({String? name, int? gate, bool? status}) {
+  DeviceEntity copyWith({String? id, String? name, int? gate, bool? status}) {
     return DeviceEntity(
+      id: id ?? this.id,
       name: name ?? this.name,
       gate: gate ?? this.gate,
       status: status ?? this.status,

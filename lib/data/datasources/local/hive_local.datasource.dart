@@ -22,7 +22,7 @@ class HiveLocalDatatasource implements IHiveLocalDatasource {
   }
 
   @override
-  Future<String> getIpMac() async {
+  Future<String?> getIpMac() async {
     final Box authBox = await openAuthBox();
     return authBox.get(KeyBoxHive.ipMac);
   }

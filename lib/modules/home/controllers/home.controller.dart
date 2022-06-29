@@ -51,6 +51,9 @@ class HomeController extends GetxController {
   Future<void> controlDigitalDevice(int deviceIndex) async {
     final Map<String, dynamic> passedData = {
       'ip_mac': rootController.currentRaspberry.ipMac,
+      'id_ras': rootController.currentRaspberry.id,
+      'id_room': currentRoom.id,
+      'id_device': currentRoom.devices[deviceIndex].id,
       'gate': currentRoom.devices[deviceIndex].gate,
       'command': currentRoom.devices[deviceIndex].status ? 0 : 1,
     };
@@ -85,6 +88,7 @@ class HomeController extends GetxController {
           },
         );
       } catch (e) {
+        _isRecording.value = false;
         log('Error in onTapButtonRecord() from HomeController: $e');
       }
     } else {

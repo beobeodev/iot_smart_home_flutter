@@ -2,45 +2,50 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:iot_smart_home/core/router/route_manager.dart';
+import 'package:iot_smart_home/core/utils/authorization.util.dart';
 import 'package:iot_smart_home/domain/entities/raspberry.entity.dart';
-import 'package:iot_smart_home/domain/usecases/authentication/check_logged_in.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/get_ip_mac.usecase.dart';
-import 'package:iot_smart_home/domain/usecases/raspberry/get_raspberry_by_ipmac.usecase.dart';
+import 'package:iot_smart_home/domain/usecases/raspberry/raspberry.usecase.dart';
+import 'package:iot_smart_home/modules/root/controllers/manager.controller.dart';
 
 class SplashController extends GetxController {
-  final CheckLoggedInUseCase checkLoggedInUseCase;
   final GetIpMacUseCase getIpMacUseCase;
   final GetRaspberryByIpMacUseCase getRaspberryByIpMacUseCase;
+  final ManagerController managerController;
 
   SplashController({
-    required this.checkLoggedInUseCase,
     required this.getIpMacUseCase,
     required this.getRaspberryByIpMacUseCase,
+    required this.managerController,
   });
 
   @override
-  void onReady() async {
+  Future<void> onReady() async {
     super.onReady();
     await handleDirect();
   }
 
   Future<void> handleDirect() async {
-    final bool? isLogged = await checkLoggedInUseCase.execute();
-    if (isLogged == null || !isLogged) {
+    final String? ipMac = await getIpMacUseCase.execute();
+    if (ipMac == null) {
       Get.offAllNamed(RouteManager.login);
     } else {
+      AuthorizationUtil.ipMac = ipMac;
+      // await getData();
+      await managerController.getData();
       Get.offAllNamed(RouteManager.root);
     }
   }
 
   Future<void> getData() async {
-    final String? ipMac = await getIpMacUseCase.execute();
-
     try {
-      final RaspberryEntity raspberryState =
-          await getRaspberryByIpMacUseCase.execute(params: ipMac!);
+      final RaspberryEntity raspberry = await getRaspberryByIpMacUseCase
+          .execute(params: AuthorizationUtil.ipMac);
+
+      managerController.currentRaspberry = raspberry;
+      // _currentRaspberry = raspberry.obs;
+      Get.offAllNamed(RouteManager.root, arguments: raspberry);
     } catch (e) {
-      log('Error in getData() from SplashController()');
+      log('Error in getData() from RootController()');
     }
   }
 }
