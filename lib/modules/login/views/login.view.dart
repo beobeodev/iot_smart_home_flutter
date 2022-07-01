@@ -7,6 +7,7 @@ import 'package:iot_smart_home/core/theme/palette.dart';
 import 'package:iot_smart_home/generated/locales.g.dart';
 import 'package:iot_smart_home/modules/login/controllers/login.controller.dart';
 import 'package:iot_smart_home/modules/login/widgets/form_input.widget.dart';
+import 'package:iot_smart_home/widgets/loading_dot.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
@@ -56,23 +57,29 @@ class LoginScreen extends GetView<LoginController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const FormInput(),
-                              TextButton(
-                                onPressed: controller.login,
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Palette.blue300,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.h),
+                              Obx(
+                                () => TextButton(
+                                  onPressed: controller.login,
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Palette.blue300,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.h),
+                                    ),
+                                    fixedSize: Size(180.w, 50.h),
                                   ),
-                                  fixedSize: Size(180.w, 50.h),
-                                ),
-                                child: Text(
-                                  LocaleKeys.button_login.tr,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: FontFamily.fontMulish,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 20.sp,
-                                  ),
+                                  child: controller.isProcessing.value
+                                      ? const LoadingDot(
+                                          size: 10,
+                                        )
+                                      : Text(
+                                          LocaleKeys.button_login.tr,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: FontFamily.fontMulish,
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 20.sp,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ],

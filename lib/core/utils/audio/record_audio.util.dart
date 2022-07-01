@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
-abstract class RecordAudio {
+abstract class RecordAudioUtil {
   static final Record _recorder = Record();
 
   static Future<void> startRecord() async {

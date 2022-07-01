@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iot_smart_home/core/utils/authorization.util.dart';
+import 'package:iot_smart_home/domain/entities/device.entity.dart';
 import 'package:iot_smart_home/domain/entities/raspberry.entity.dart';
 import 'package:iot_smart_home/domain/entities/room.entity.dart';
 import 'package:iot_smart_home/domain/usecases/raspberry/raspberry.usecase.dart';
@@ -35,6 +36,24 @@ class RootController extends GetxController {
   Future<void> onInit() async {
     await getData();
     super.onInit();
+  }
+
+  void updateDevicesInRasp(List<DeviceEntity> newDevices, int roomIndex) {
+    _currentRaspberry.value.rooms[roomIndex].devices = newDevices;
+  }
+
+  void updateRaspberryAfterPredict({
+    required String roomId,
+    required String deviceId,
+    required int command,
+  }) {
+    final int roomIndex =
+        currentRaspberry.rooms.indexWhere((element) => element.id == roomId);
+    final int deviceIndex = currentRaspberry.rooms[roomIndex].devices
+        .indexWhere((element) => element.id == deviceId);
+
+    _currentRaspberry.value.rooms[roomIndex].devices[deviceIndex].status =
+        command == 1;
   }
 
   Future<void> getData() async {

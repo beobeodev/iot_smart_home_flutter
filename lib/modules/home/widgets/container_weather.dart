@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iot_smart_home/core/constants/asset_path.dart';
+import 'package:iot_smart_home/core/constants/font_family.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
 import 'package:iot_smart_home/core/utils/extensions/date_time.extension.dart';
 import 'package:iot_smart_home/modules/home/controllers/home.controller.dart';
@@ -46,7 +47,12 @@ class ContainerWeather extends GetView<HomeController> {
                       children: [
                         Text(
                           '${controller.currentDHT11.temperature} \u2103',
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: TextStyle(
+                            fontFamily: FontFamily.fontMulish,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 20.sp,
+                            color: Palette.darkCerulean500,
+                          ),
                         ),
                         Text(
                           '${controller.currentDHT11.humidity} %',

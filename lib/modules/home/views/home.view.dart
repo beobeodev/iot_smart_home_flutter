@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:iot_smart_home/core/constants/asset_path.dart';
 import 'package:iot_smart_home/core/constants/font_family.dart';
 import 'package:iot_smart_home/core/theme/palette.dart';
 import 'package:iot_smart_home/modules/home/controllers/home.controller.dart';
@@ -60,7 +61,12 @@ class HomeScreen extends GetView<HomeController> {
                     )
                   ],
                 ),
-                Container(width: 50.w, height: 50.w, color: Colors.red)
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage(
+                    AssetPath.imageAvatar,
+                  ),
+                )
               ],
             ),
             SizedBox(
@@ -76,9 +82,9 @@ class HomeScreen extends GetView<HomeController> {
                 style: TextButton.styleFrom(
                   backgroundColor: Palette.blue500,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60),
+                    borderRadius: BorderRadius.circular(50),
                   ),
-                  minimumSize: const Size(60, 60),
+                  minimumSize: const Size(50, 50),
                 ),
                 child: Obx(
                   () => Icon(
@@ -91,10 +97,6 @@ class HomeScreen extends GetView<HomeController> {
             const SizedBox(
               height: 30,
             ),
-            // IconButton(
-            //     onPressed: () {},
-
-            //     icon: Icon(controller.isRecording ? Icons.pause : Icons.mic)),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

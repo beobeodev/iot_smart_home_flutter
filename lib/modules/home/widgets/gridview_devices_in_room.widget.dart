@@ -33,7 +33,7 @@ class GridViewDevicesInRoom extends GetView<HomeController> {
               width: 180.w,
               height: 50.h,
               child: DropdownButtonFormField(
-                items: controller.rootController.currentRaspberry.rooms
+                items: _rootController.currentRaspberry.rooms
                     .map(
                       (e) => DropdownMenuItem(
                         value: e.id,
@@ -42,9 +42,7 @@ class GridViewDevicesInRoom extends GetView<HomeController> {
                     )
                     .toList(),
                 onChanged: controller.onChangeDropdownRoom,
-                value: _rootController.currentRaspberry.rooms.isEmpty
-                    ? null
-                    : controller.currentRoom.id,
+                value: controller.currentRoom?.id,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   border: OutlineInputBorder(
@@ -72,7 +70,7 @@ class GridViewDevicesInRoom extends GetView<HomeController> {
                   crossAxisSpacing: 60.w,
                   mainAxisSpacing: 20.h,
                 ),
-                itemCount: controller.currentRoom.devices.length,
+                itemCount: controller.currentRoom?.devices.length,
                 itemBuilder: (context, index) {
                   return Container(
                     padding:
@@ -99,36 +97,39 @@ class GridViewDevicesInRoom extends GetView<HomeController> {
                               onTap: () {
                                 controller.controlDigitalDevice(index);
                               },
-                              child: Obx(
-                                () => Container(
-                                  width: 50.w,
-                                  height: 30.h,
-                                  padding: const EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30.h),
-                                    color: controller
-                                            .currentRoom.devices[index].status
-                                        ? Palette.blue400
-                                        : Palette.cultured,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      controller
-                                              .currentRoom.devices[index].status
-                                          ? const Spacer()
-                                          : const SizedBox(),
-                                      Container(
-                                        width: 25.w,
-                                        height: 25.w,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(25.w),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
+                              child: GetBuilder<HomeController>(
+                                id: controller.currentRoom!.devices[index].id,
+                                builder: (homeController) {
+                                  return Container(
+                                    width: 50.w,
+                                    height: 30.h,
+                                    padding: const EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.h),
+                                      color: homeController.currentRoom!
+                                              .devices[index].status
+                                          ? Palette.blue400
+                                          : Palette.cultured,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        homeController.currentRoom!
+                                                .devices[index].status
+                                            ? const Spacer()
+                                            : const SizedBox(),
+                                        Container(
+                                          width: 25.w,
+                                          height: 25.w,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(25.w),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
                             )
                           ],
@@ -137,7 +138,7 @@ class GridViewDevicesInRoom extends GetView<HomeController> {
                           height: 20.h,
                         ),
                         Text(
-                          controller.currentRoom.devices[index].name,
+                          controller.currentRoom!.devices[index].name,
                           style: TextStyle(
                             color: Palette.blue500,
                             fontFamily: FontFamily.fontMulish,
